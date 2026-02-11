@@ -1,19 +1,40 @@
+import logo from "./images/dnj-logo.png";
 import { useState, useEffect } from "react";
 import "./App.css";
+
+interface Review {
+  name: string;
+  rating: string;
+  review: string;
+}
 
 export default function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
-  const [reviews, setReviews] = useState<
-    { name: string; rating: string; review: string }[]
-  >([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [showAll, setShowAll] = useState(false);
+
+  /* Load saved reviews */
+  useEffect(() => {
+    const savedReviews = localStorage.getItem("reviews");
+    if (savedReviews) {
+      setReviews(JSON.parse(savedReviews));
+    }
+  }, []);
+
+  /* Save reviews whenever updated */
+  useEffect(() => {
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+  }, [reviews]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setReviews([{ name, rating, review }, ...reviews]);
+    const newReview: Review = { name, rating, review };
+
+    setReviews([newReview, ...reviews]);
 
     setName("");
     setEmail("");
@@ -21,30 +42,23 @@ export default function App() {
     setReview("");
   };
 
-  /* Scroll reveal */
-  useEffect(() => {
-    const elements = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("active");
-        });
-      },
-      { threshold: 0.15 }
-    );
-    elements.forEach((el) => observer.observe(el));
-  }, []);
+  const deleteReview = (index: number) => {
+    const updated = reviews.filter((_, i) => i !== index);
+    setReviews(updated);
+  };
 
   return (
     <div className="luxury-page">
-      {/* HERO */}
-      <section className="hero reveal">
-        <h1>Dwarika Naari Jewellery</h1>
-        <p>Grace in gold • Power in design • Timeless luxury</p>
-      </section>
 
-      {/* REVIEW */}
-      <section className="review-section reveal">
+      {/* HERO */}
+<section className="hero">
+  <img src={logo} alt="Dwarika Naari Jewellery Logo" className="hero-logo" />
+  <h1>Dwarika Naari Jewellery</h1>
+  <p>Grace in gold • Power in design • Timeless luxury</p>
+</section>
+
+      {/* REVIEW FORM */}
+      <section className="review-section">
         <form className="luxury-card" onSubmit={handleSubmit}>
           <h2>Customer Review</h2>
 
@@ -89,42 +103,50 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="testimonials reveal">
+      <section className="testimonials">
         <h2>What Our Customers Say</h2>
+
         <div className="testimonial-grid">
-          {reviews.map((r, i) => (
-            <div className="testimonial-card" key={i}>
+          {(showAll ? reviews : reviews.slice(0, 3)).map((r, i) => (
+            <div
+  className="testimonial-card"
+  key={i}
+  onDoubleClick={() => {
+    if (window.confirm("Delete this review?")) {
+      deleteReview(i);
+    }
+  }}
+>
               <h3>{r.name}</h3>
               <span>{r.rating}</span>
               <p>{r.review}</p>
             </div>
           ))}
         </div>
+
+        {reviews.length > 3 && (
+          <button
+            className="see-more-btn"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Show Less" : "Show More"}
+          </button>
+        )}
       </section>
 
       {/* ABOUT */}
-      <section className="about reveal">
+      <section className="about">
         <h2>About Our Jewellery</h2>
         <p>
-          Dwarika Nari celebrates modern femininity through handcrafted gold,
+          Dwarika Naari celebrates modern femininity through handcrafted gold,
           diamond and silver jewellery. Every piece blends heritage artistry with
           contemporary elegance.
         </p>
       </section>
 
-      {/* OFFERS */}
-      <section className="offers reveal">
-        <h2>Exclusive Offers</h2>
-        <div className="offer-grid">
-          <div className="offer-card">Bridal Jewellery – 20% Off</div>
-          <div className="offer-card">Zero Making Charges</div>
-          <div className="offer-card">Diamond Fest – 30% Off</div>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer className="footer">
-        © 2026 Dwarika Nari Jewellery • All Rights Reserved
+        © 2026 Dwarika Naari Jewellery • All Rights Reserved
       </footer>
     </div>
   );

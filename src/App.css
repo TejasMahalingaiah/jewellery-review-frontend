@@ -4,7 +4,7 @@ body {
   margin: 0;
   min-width:320px;
   min-height: 100vh;
-  background: linear-gradient(180deg,#0f0f0f,#1a1a1a);
+  background: #ffffff;
 }
 
 /* HERO */
@@ -15,17 +15,29 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 60px 20px;
+  background: #fdfaf5;
+}
+
+.hero-logo {
+  width: 220px;
+  margin-bottom: 20px;
 }
 
 .hero h1 {
   font-family: "Playfair Display", serif;
-  font-size: 4rem;
-  color: #d4af37;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #FFD700;
+  margin-bottom: 10px;
 }
 
 .hero p {
-  font-size: 1.25rem;
+  font-size: 18px;
   opacity: 0.85;
+  color: #555;
+  max-width: 500px;
 }
 
 /* REVIEW CARD */
@@ -33,16 +45,17 @@ body {
   display: flex;
   justify-content: center;
   margin-top: -160px;
+  color: #2c2c2c;
 }
 
 .luxury-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: #ffffff;
   backdrop-filter: blur(20px);
   padding: 45px;
   max-width: 520px;
   width: 100%;
   border-radius: 20px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+  box-shadow: none;
 }
 
 .luxury-card input,
@@ -52,22 +65,23 @@ body {
   margin-bottom: 14px;
   padding: 14px;
   border-radius: 12px;
-  border: none;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  color: #333;
+  font-size: 1rem;
 }
 
 .luxury-card button {
   width: 100%;
   padding: 14px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #d4af37, #b8962e);
+  background: #d4af37;
   font-weight: 600;
   cursor: pointer;
 }
 
 .luxury-card button:hover {
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 25px rgba(241, 197, 53, 0.7);
 }
 
 /* TESTIMONIALS */
@@ -85,14 +99,15 @@ body {
 }
 
 .testimonial-card {
-  background: #14110f;
+  background: #ffffff;                 /* Pure white */
   padding: 25px;
   border-radius: 18px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1.5px solid #D4AF37;         /* Luxury gold border */
+  transition: all 0.3s ease;
 }
 
 .testimonial-card h3 {
-  color: #d4af37;
+  color: #2c2c2c;
 }
 
 /* OFFERS */
@@ -160,7 +175,7 @@ h1 {
   font-size: 3.2rem;
   letter-spacing: 1px;
   margin-bottom: 3rem;
-  color: #f5d28e;
+  color: #2c2c2c;
 }
 
 /* Review Form */
@@ -194,7 +209,7 @@ h1 {
 .review-form button {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #caa14d, #f5d28e);
+  background: #f5d28e;
   border: none;
   border-radius: 12px;
   font-size: 1.1rem;
@@ -274,4 +289,61 @@ h1 {
   text-align: center;
   color: #aaa;
   font-size: 0.95rem;
+}
+.sub-heading {
+  letter-spacing: 4px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #b8962e;
+  margin-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c2c2c;
+  font-family: "Playfair Display", serif;
+}
+h1, h2, h3, h4, h5, h6,
+p,
+span,
+a,
+li {
+  color: #2c2c2c;
+}
+
+.about h2,
+.about p {
+  color: #2c2c2c;  /* Charcoal */
+}
+
+.review-form h2,
+.review-form label,
+.review-form input,
+.review-form textarea {
+  color: #2c2c2c;   /* Charcoal */
+}
+
+.delete-btn {
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid #2c2c2c;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+.delete-btn:hover {
+  background: #2c2c2c;
+  color: white;
+}
+
+.see-more-btn {
+  margin-top: 30px;
+  padding: 10px 25px;
+  border: none;
+  background: #d4af37;
+  color: #2c2c2c;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
 }
